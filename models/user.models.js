@@ -2,7 +2,7 @@ module.exports = (Sequelize, sequelize) => {
   const User = sequelize.define(
     "Users",
     {
-      id: {
+      user_id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
