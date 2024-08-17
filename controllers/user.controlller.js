@@ -1,5 +1,5 @@
 const db = require("../models");
-const User = db.User;
+const User = db.Speaker;
 
 exports.getUsers = async (req, res) => {
   const users = await User.findAll();
