@@ -1,10 +1,15 @@
 const express = require('express')
+const bodyParser = require('body-parser');
 const app = express()
 const router = require('./routes')
 const dotenv = require("dotenv");
 const db = require("./models");
 
 dotenv.config();
+
+// Middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/api", router);
 
