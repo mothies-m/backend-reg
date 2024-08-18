@@ -37,6 +37,14 @@ module.exports = (Sequelize, sequelize) => {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW,
       },
+      otp_code: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      otp_expires_at: {
+        type: Sequelize.DATE,
+        allowNull: true,
+      },
     },
     {
       tableName: "users",
