@@ -1,12 +1,12 @@
-const createCalendarEvent = require("../middleware/calender.middleware");
-const { bookingMail } = require("../middleware/otp.middleware");
+const { sendBookingConfirmation } = require("../utils/calender.utils");
+const { bookingMail } = require("../utils/otp.utils");
 const { Speaker, Session, User } = require("../models");
 
 //list of speaker
 const speakers = async (req, res) => {
   try {
     const users = await User.findAll({
-      where: { role: "speaker", is_verified: true },
+      where: { role: "speaker" },
       attributes: ["user_id", "first_name", "last_name"],
     });
 
@@ -14,18 +14,21 @@ const speakers = async (req, res) => {
       attributes: ["user_id", "expertise", "price_per_session", "created_at"],
     });
 
-    const userIds = users.map((user) => user.user_id);
+    const userIds = speakers.map((user) => user.user_id);
 
     if (userIds.length === 0) {
       return res.status(404).json({ message: "No speakers found." });
     }
 
-    const result = [];
+    const speakersMap = new Map(
+      speakers.map((speaker) => [speaker.user_id, speaker])
+    );
 
-    for (const user of users) {
-      for (const speaker of speakers) {
-        if (user.user_id === speaker.user_id) {
-          const combinedData = {
+    const result = users
+      .map((user) => {
+        const speaker = speakersMap.get(user.user_id);
+        if (speaker) {
+          return {
             speaker_id: speaker.speaker_id,
             user_id: speaker.user_id,
             first_name: user.first_name,
@@ -34,11 +37,10 @@ const speakers = async (req, res) => {
             price_per_session: speaker.price_per_session,
             created_at: speaker.created_at,
           };
-
-          result.push(combinedData);
         }
-      }
-    }
+        return null;
+      })
+      .filter((item) => item !== null);
 
     res.json(result);
   } catch (error) {
@@ -100,6 +102,30 @@ const booking = async (req, res) => {
     const mail = await User.findOne({ where: user_id });
     await bookingMail(mail.email, user, speaker, date, time_slot);
 
+    const sessions = await User.findOne({ where: { user_id } });
+
+    const starttime = new Date(`${date}T${time_slot}`);
+
+    const endtime = new Date(starttime.getTime() + 60 * 60 * 1000);
+
+    await sendBookingConfirmation(
+      user.email,
+      starttime,
+      endtime,
+      `Meeting with Speaker: ${speaker.expertise}`,
+      "Discuss upcoming session details",
+      "Conference Room A",
+      `https://PlateUp.com/meeting/${sessions.id}`,
+      `${speaker.first_name} ${speaker.last_name}`,
+      speaker.email
+    )
+      .then(() => {
+        console.log("Email sent successfully");
+      })
+      .catch((err) => {
+        console.error("Error sending email:", err);
+      });
+
     const session = await Session.create({
       user_id,
       speaker_id,
@@ -107,8 +133,7 @@ const booking = async (req, res) => {
       time_slot,
     });
 
-    const time = await Session.findOne({ where: {speaker_id: speaker_id} });
-    await createCalendarEvent(user, speaker, time);
+    const time = await Session.findOne({ where: { speaker_id: speaker_id } });
 
     res.status(201).json({
       message: "Session booked successfully.",
