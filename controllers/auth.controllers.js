@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { User } = require("../models");
-const { sendOtp } = require("../middleware/otp.middleware");
+const { sendOtp } = require("../utils/otp.utils");
 
 //REGISTER
 

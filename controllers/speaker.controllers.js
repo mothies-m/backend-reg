@@ -15,7 +15,7 @@ const getSpeaker = async (req, res) => {
       return res.status(404).json({ message: "User not found." });
     }
 
-    if (user.role !== "speaker" || !user.is_verified) {
+    if (user.role !== "speaker") {
       return res.status(403).json({
         message: "Access denied. Only verified speakers can access this route.",
       });
