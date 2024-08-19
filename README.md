@@ -50,8 +50,8 @@ Logs in an existing user by verifying their credentials. If the credentials are 
 
 ### Description
 
-- **Verifies a user's account using an OTP (One-Time Password). This endpoint is used to activate or verify a user's email address.
-- **__Make sure you not the `user_id` after verification.__
+- Verifies a user's account using an OTP (One-Time Password). This endpoint is used to activate or verify a user's email address.
+- __Make sure you not the `user_id` after verification.__
 ### Request
 
 - **Content-Type:** `application/json`
@@ -177,11 +177,11 @@ Allows a verified user to book a session with a speaker. Each user can book only
 
 ## Booking Confirmation and Session Timeline
 
-- **Description: After booking a session, the user will receive a booking confirmation email and a session timeline email. For reliable OTP and confirmation emails, use a Gmail address.
+- Description: After booking a session, the user will receive a booking confirmation email and a session timeline email. For reliable OTP and confirmation emails, use a Gmail address.
 
-- **Note: Non-Gmail addresses may experience delays in receiving OTP or confirmation emails.
+- Note: Non-Gmail addresses may experience delays in receiving OTP or confirmation emails.
 
-- **Note: Time slot available between `09:00:00` - `16:00:00` .
+- Note: Time slot available between `09:00:00` - `16:00:00` .
 
 ### Email Notification
 
