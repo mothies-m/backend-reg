@@ -25,7 +25,7 @@ const register = async (req, res) => {
       password: hashedPassword,
       role,
     });
-    res.status(201).json({ user });
+    res.status(201).json({ message: `New user ${user.first_name} is Created as ${user.role} Role.` });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
