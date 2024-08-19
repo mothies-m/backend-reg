@@ -19,7 +19,7 @@ app.listen(PORT, () => {
 });
 
 app.get("/", (req, res) => {
-  res.json({ message: "Drigo here🙌" });
+  res.json({ message: "Hey it's Mothieswaran M !" });
 });
 
 db.sequelize.sync({ force: false }).then(() => {
