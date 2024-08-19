@@ -50,8 +50,8 @@ Logs in an existing user by verifying their credentials. If the credentials are 
 
 ### Description
 
-Verifies a user's account using an OTP (One-Time Password). This endpoint is used to activate or verify a user's email address.
-__Make sure you not the `user_id` after verification.__
+- **Verifies a user's account using an OTP (One-Time Password). This endpoint is used to activate or verify a user's email address.
+- **__Make sure you not the `user_id` after verification.__
 ### Request
 
 - **Content-Type:** `application/json`
@@ -106,7 +106,7 @@ Only `Role: speaker` can create a speaker profile.
 - **Body:**
   ```json
   {
-    "user_id":user_id,
+    "user_id": user_id ,
     "expertise": "Cyber Security",
     "price_per_session":500.00
   }
