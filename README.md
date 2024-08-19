@@ -106,7 +106,7 @@ Only `Role: speaker` can create a speaker profile.
 - **Body:**
   ```json
   {
-    "user_id": user_id ,
+    "user_id": userid ,
     "expertise": "Cyber Security",
     "price_per_session":500.00
   }
