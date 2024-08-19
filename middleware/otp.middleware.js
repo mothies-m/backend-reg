@@ -26,4 +26,22 @@ const sendOtp = async(toEmail, otp) => {
   });
 }
 
-module.exports={sendOtp};
+const bookingMail = async (toEmail, user, speaker, date, time_slot) => {
+  await transporter.sendMail({
+    from: process.env.SMTP_SENDER,
+    to: toEmail,
+    subject: "Session Booking Confirmation",
+    html: `
+    <div style="font-family: Arial, sans-serif; text-align: left; padding: 20px; color: #333;">
+      <h2 style="color: #4CAF50;">Booking Confirmation</h2>
+      <p>Dear ${user.first_name} ${user.last_name},</p>
+      <p>Your session with the speaker <strong>${speaker.expertise}</strong> has been successfully booked.</p>
+      <p><strong>Date:</strong> ${date}</p>
+      <p><strong>Time:</strong> ${time_slot}</p>
+      <p>Thank you for choosing our service. We look forward to your session.</p>
+      <p>Regards,<br>PlateUp</p>
+    </div>`,
+  });
+};
+
+module.exports = { sendOtp, bookingMail };
