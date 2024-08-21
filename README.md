@@ -5,7 +5,7 @@
 Backend Plateup is a project that handles user registration, login, profile creation for speakers, session booking, and email notifications. This documentation provides information on how to interact with the API endpoints for these functionalities.
 
 __BY:__
-__Mothieswaran M (RA2111003050043)__
+__Mothieswaran M
 
 ## API Endpoints
 
