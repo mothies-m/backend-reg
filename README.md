@@ -80,8 +80,6 @@ All API responses follow a consistent format to ensure clarity and ease of use:
 
 ### Successful Responses
 
-#### 200 OK
-
 - **Description**: The request was successful, and the response body contains the requested data or confirmation message.
 - **Example Body:**
   ```json
