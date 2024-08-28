@@ -1,8 +1,8 @@
-# Backend Plateup
+# Backend-reg
 
 ## Overview
 
-Backend Plateup is a project that handles user registration, login, profile creation for speakers, session booking, and email notifications. This documentation provides information on how to interact with the API endpoints for these functionalities.
+Backend-reg is a project that handles user registration, login, profile creation for speakers, session booking, and email notifications. This documentation provides information on how to interact with the API endpoints for these functionalities.
 
 __BY:__
 Mothieswaran M
