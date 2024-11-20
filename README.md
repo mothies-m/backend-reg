@@ -28,7 +28,7 @@ Mothieswaran M
 ### Endpoint
 
 - **Method:** `POST`
-- **URL:** `/api/user/login`
+- **URL:** `/api/auth/login`
 
 ### Description
 
